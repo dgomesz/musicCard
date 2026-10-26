@@ -1,4 +1,4 @@
 package com.example.musicard.controller;
 
-public class AdminController {
+public class MusicaController {
 }

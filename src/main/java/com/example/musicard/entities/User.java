@@ -1,41 +1,34 @@
 package com.example.musicard.entities;
 
-
-
+import com.example.musicard.entities.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import com.example.musicard.entities.enums.Role;
-import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-
+@AllArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
+
     @NotBlank
     private String nome;
 
-
-    @NotBlank
-    @Email
+    @NotBlank @Email
     @Column(unique = true, length = 150)
     private String email;
 
     @NotBlank
-    @Length(min = 6, max = 20 ,message = "LIMITE DE CARACTERES EXCEDIDO" )
-    private String senha;
+    @Column(length = 100)
+    private String senha; // hash BCrypt
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Role role;
-
-
 }
